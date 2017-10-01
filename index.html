@@ -5,12 +5,34 @@
     <script type="text/javascript" src="./client/client.js"></script>
     <title>Knockout Tournament</title>
   </head>
-  <body>
+  <body class="content-viewport">
     <!-- Edit me. -->
     <!-- For tests to pass, the IDs of the elements below MUST NOT change. -->
-    <input id="teamsPerMatch" placeholder="Teams per match" type="number" />
-    <input id="numberOfTeams" placeholder="Number of teams" type="number" />
-    <button id="start">Start</button>
-    <span id="winner"></span>
+    <h3 class="header">Welcome to the Championship</h3>
+    <br>
+    <div class="details-form">
+      <h4>Please enter the following to start with the tournamnet</h4>
+      <form>
+          <label for="teamsPerMatch">Teams Per Match &emsp;</label>
+          <input id="teamsPerMatch" placeholder="Teams per match" type="number" min="2" required/>
+          <br><br>
+
+          <label for="numberOfTeams">Number of Teams &emsp;</label>
+          <input id="numberOfTeams" placeholder="Number of teams" type="number" min="2" required/>
+      </form>
+      <br>
+      <span id="details-form-error" class="error-msg"></span>
+      <span id="details-form-success" class="success-msg"></span>
+      <br>
+      <button id="start">Start</button>
+    </div>
+
+    <div class="rounds-container">
+      
+    </div>
+
+    <div class="winner-container">
+        <span id="winner"></span>
+    </div>
   </body>
 </html>
