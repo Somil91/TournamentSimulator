@@ -10,3 +10,9 @@ input:invalid {
 input:valid {
     border: .1em solid black;
 }
+
+.match-indicator {
+    border: 1px solid black;
+    fill-opacity: 0;
+    margin-right: 5px;
+}

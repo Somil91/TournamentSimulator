@@ -20,7 +20,7 @@ class TournamentTriggerElement{
 
         // 1. Call the backend to fetch result of Tournament 
         const ep = new Tournament();
-        ep.getTournamentRound(9,3);
+        const tournamentInstance = ep.getTournamentRound(81,3);
 
 
 

@@ -5,12 +5,12 @@
 
 class Match{
 
-    constructor(tournamentId, round, teams, match){
+    constructor(tournamentId, round, match){
         this.tournamentId = tournamentId;
         this.round = round;
-        this.teams = teams;
+        this.teams = match.teamIds;
         this.allTeamDetails = [];
-        this.match = match;
+        this.match = match.match;
         this.endpointService = new EndpointService();
     }
 
@@ -23,7 +23,7 @@ class Match{
             fetchTeamsPromises.push(team.fetchTeamDetails());
         });
 
-        // console.log("Pr array", fetchTeamsPromises);
+
         let teamsInfo = await Promise.all(fetchTeamsPromises);
         console.log("RS", teamsInfo);
 
@@ -50,7 +50,14 @@ class Match{
         }
 
         console.log("Winning Team =", winnerTeams[0]);
+
+        this.setIndicatorLoading(this.round, this.match);
         return winnerTeams[0];
+
+        //Perform Dom Manipulation here for indicator
+
+
+
     }
 
 
@@ -66,7 +73,7 @@ class Match{
 
     async getMatchScore(payload){
         this.response = await this.endpointService.getApiData('/match', payload);
-        console.log(this.response.score);
+        // console.log(this.response.score);
         // return this.teamDetails;
 
         return this.response.score;
@@ -75,26 +82,15 @@ class Match{
 
     async getWinnerScore(payload){
         this.response = await this.endpointService.getApiData('/winner', payload);
-        console.log(this.response.score);
-        // return this.teamDetails;
-
         return this.response.score;
         
     }
 
-    // getTeamInfo(teamId, tournamentId){
-    //     const team = new Team(teamId, tournamentId);
-
-    //     const getTeamInfo = async() => {
-    //         let teamInfo = await team.fetchTeamDetails();
-    //         this.allTeamDetails.push(teamInfo)
-    //         return teamInfo;
-    //     }
-    //     // const teamInfo = team.fetchTeamDetails();
-    //     // return teamInfo;
-
-    //     // return (getTeamInfo();
-    // }
-    
+    setIndicatorLoading(roundNo, matchNo){
+        let elementId = 'round_'+ roundNo;
+        let containerElement = document.getElementById(elementId);
+        let childElement = containerElement.children[matchNo];
+        childElement.setAttribute('style', 'fill-opacity:1.0;');
+    }
 
 }

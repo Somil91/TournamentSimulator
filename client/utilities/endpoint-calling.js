@@ -31,7 +31,7 @@ class EndpointService{
     postApiData(endpoint, params){
         const payload = this.encodeParams(params);
         console.log("Payload", payload);
-        return fetch('/tournament',  {
+        return fetch(endpoint,  {
             method: 'POST',
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: payload
@@ -57,7 +57,7 @@ class EndpointService{
 
     validateFetchResponse(response){
         if(response.ok){
-            console.log("Validating Fetch Response", response);
+            // console.log("Validating Fetch Response", response);
             // return response.json();
         }
 

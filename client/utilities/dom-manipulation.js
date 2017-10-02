@@ -29,9 +29,10 @@ class RoundDomElement {
 
     getMatchIndicatorElement(){
         let svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svgElement.setAttribute("class", "match-indicator");
         svgElement.setAttribute("width", "10");
         svgElement.setAttribute("height", "10");
-        svgElement.setAttribute("style", "border: 1px solid black; fill-opacity:0; margin-right:5px;");
+        // svgElement.setAttribute("style", "border: 1px solid black; fill-opacity:0; margin-right:5px;");
 
         let rectElement = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         rectElement.setAttribute("fill", "#000");
