@@ -1,12 +1,23 @@
-
-
+/**
+ * @class Utility Class 
+ * This takes care of creating an instance of the round progress in the DOM.
+ */
 class RoundDomElement {
+    /**
+     * @constructor get DOM refernce and registers the progress indicator
+     * @param {dom element id to append to} roundElementId 
+     * @param {total matches count for a round} matchesCount 
+     * @param {current round of the tournamentrnt } roundNumber 
+     */
     constructor(roundElementId, matchesCount, roundNumber) {
         this.roundsElementRef = document.getElementById(roundElementId);
         this.matchesCount = matchesCount;
         this.roundNumber = roundNumber;
     }
 
+    /**
+     * This create the element required for the progress indicator.
+     */
     drawMatchIndicator(){
         let roundContainerElement = this.getRoundContainerElement(this.roundNumber);  
         let docFragment =  document.createDocumentFragment();
@@ -21,7 +32,9 @@ class RoundDomElement {
         this.roundsElementRef.append(this.getRoundSeperatorElement());
     }
 
-
+    /**
+     * This create a dummy element that later gets appended to the DOM.
+     */
     getMatchIndicatorElement(){
         let svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svgElement.setAttribute("class", "match-indicator");
@@ -38,6 +51,9 @@ class RoundDomElement {
         return indicatorElement;
     }
 
+    /**
+     * This creates seperator element to distinguish between the rounds.
+     */
     getRoundSeperatorElement(){
         let dividerSpace = document.createElement("span");
         dividerSpace.innerHTML += '&emsp;';
@@ -45,6 +61,10 @@ class RoundDomElement {
         return spaceElement;
     }
 
+    /**
+     * This returns the reference of the progress indicator container for the current round.
+     * @param {current tournament round} roundNumber 
+     */
     getRoundContainerElement(roundNumber){
         let roundContainerElement = document.createElement("span");
         let id = "round_"+roundNumber;
