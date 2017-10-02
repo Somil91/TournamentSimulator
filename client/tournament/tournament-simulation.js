@@ -45,8 +45,9 @@ class Tournament{
         roundObj.drawMatchIndicator();
 
         // 2. Send the data
-        const match = new Match(tournamentId, currentRound, allMatches[0].teamIds);
-        match.triggerMatch();
+        const match = new Match(tournamentId, currentRound, allMatches[0].teamIds, 0);
+        let winningTeam = match.triggerMatch();
+        console.log("Winner Here in tournament ", winningTeam);
 
 
 

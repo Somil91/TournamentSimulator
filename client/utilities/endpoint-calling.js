@@ -15,7 +15,7 @@ class EndpointService{
     createPayload(params){
         const encodedParams = Object.keys(params).map((prop) => {
             if(Array.isArray(params[prop])){
-                return params[prop].map( np => encodeURIComponent(np) + "=" + encodeURIComponent(np)).join('&');
+                return params[prop].map( np => encodeURIComponent(prop) + "=" + encodeURIComponent(np)).join('&');
             } else
                 return encodeURIComponent(prop) + "=" + encodeURIComponent(params[prop]);
         }).join('&');
@@ -43,11 +43,11 @@ class EndpointService{
     }
 
 
-    getApiData(endpoint, params, cacheFlag="default"){
+    getApiData(endpoint, params, cache="default"){
         const url = endpoint + "?" + this.encodeParams(params);
-        fetch(url,  {
+        return fetch(url,  {
             method: 'GET',
-            cache: cacheFlag
+            cache: 'force-cache'
         })
         .then(this.validateFetchResponse)
         .then(this.getApiResponse, this.apiCallingError)
@@ -65,7 +65,7 @@ class EndpointService{
     }
 
     getApiResponse(response){
-        console.log("@ level", response);
+        // console.log("@ level", response);
         return response;
     }
 
