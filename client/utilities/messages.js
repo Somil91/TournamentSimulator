@@ -5,7 +5,7 @@
 
 class MessageService {
 
-    constructor(selector, message){
+    constructor(selector, message=''){
         
         // this.msgColors = { success: '#25A25A', error: '#EE4054'};
         this.msgDisplayOptions = { show: 'flex', none: 'none'};
@@ -14,13 +14,8 @@ class MessageService {
         this.message = message;
     }
 
-    renderMsg() {
+    renderMsg(showHideFlag) {
         this.elementRef.innerHTML = this.message;
-        // this.elementRef.style.color = (this.msgType ==='success') ? this.msgColors.success : this.msgColors.error;
-        // this.elementRef.style.display = this.showHideFlag ? this.msgDisplayOptions.show : this.msgDisplayOptions.none;
-    }
-
-    toggleMsgVisibility(showHideFlag) {
         this.elementRef.style.display = showHideFlag ? this.msgDisplayOptions.show : this.msgDisplayOptions.none;
     }
 }

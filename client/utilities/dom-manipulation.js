@@ -6,7 +6,6 @@
 class RoundDomElement {
     constructor(roundElementId, matchesCount, roundNumber) {
         this.roundsElementRef = document.getElementById(roundElementId);
-        // drawMatchIndicator();
         this.matchesCount = matchesCount;
         this.roundNumber = roundNumber;
     }
@@ -32,7 +31,6 @@ class RoundDomElement {
         svgElement.setAttribute("class", "match-indicator");
         svgElement.setAttribute("width", "10");
         svgElement.setAttribute("height", "10");
-        // svgElement.setAttribute("style", "border: 1px solid black; fill-opacity:0; margin-right:5px;");
 
         let rectElement = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         rectElement.setAttribute("fill", "#000");
@@ -47,10 +45,6 @@ class RoundDomElement {
     getRoundSeperatorElement(){
         let dividerSpace = document.createElement("span");
         dividerSpace.innerHTML += '&emsp;';
-        // dividerSpace.textContent = "&emsp;";
-        // let textnode = document.createTextNode("&emsp;");
-        // dividerSpace.appendChild(textnode);
-
         let spaceElement = dividerSpace.cloneNode(true);
         return spaceElement;
     }

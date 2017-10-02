@@ -16,22 +16,33 @@ class Tournament{
     async getTournamentRound(noOfTeams, teamsPerMatch) {
         const payload = {numberOfTeams: noOfTeams, teamsPerMatch: teamsPerMatch};
 
-        this.tournamentInstance = await this.getInitialTournamentRound(payload);
-        this.evaluateMatches(
-            this.tournamentInstance.tournamentId,
-            this.tournamentInstance.round,
-            this.tournamentInstance.matchUps,
-            teamsPerMatch
-        );
+        try {
+            this.tournamentInstance = await this.getInitialTournamentRound(payload);
+                    if(this.tournamentInstance.tournamentId){
+                        this.evaluateMatches(
+                            this.tournamentInstance.tournamentId,
+                            this.tournamentInstance.round,
+                            this.tournamentInstance.matchUps,
+                            teamsPerMatch
+                        );
+                    }
+        } catch(err) {
+            this.endpointService.logError(err);
+        }
+
     }
 
 
    async getInitialTournamentRound(payload){
-    let tournamentInstance = await this.endpointService.postApiData('/tournament', payload);
-    tournamentInstance.round = 0;
-    console.log("initial Tournament", tournamentInstance);
-    return tournamentInstance;
-    }
+       try {
+        let tournamentInstance = await this.endpointService.postApiData('/tournament', payload)
+        tournamentInstance.round = 0;
+        console.log("initial Tournament", tournamentInstance);
+        return tournamentInstance;
+       } catch(err) {
+           this.endpointService.apiCallingError(err);
+       }
+}
     
     async evaluateMatches(tournamentId, currentRound, matchUps, teamsPerMatch){
         // const tournamentId = this.tournamentInstance.currentRound;
@@ -53,6 +64,7 @@ class Tournament{
 
         if(winningTeams.length === 1){
             console.log("Winner is ", winningTeams[0]);
+            this.displayWinner(winningTeams[0]);
         } else {
             currentRound += 1;
             let nextRoundMatches = this.getTeamsForNextRound(winningTeams, teamsPerMatch);
@@ -77,6 +89,11 @@ class Tournament{
         }
         return matches;
 
+    }
+
+    displayWinner(team){
+       let winnerElement = document.getElementById('winner');
+       winnerElement.textContent = team.name + ' is the Winner.'; 
     }
 
 }

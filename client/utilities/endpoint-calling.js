@@ -37,8 +37,8 @@ class EndpointService{
             body: payload
         })
         .then(this.validateFetchResponse)
-        .then(this.getApiResponse, this.apiCallingError)
-        .catch(this.apiCallingError);
+        .then(this.getApiResponse);
+        // .catch(this.apiCallingError);
 
     }
 
@@ -47,55 +47,40 @@ class EndpointService{
         const url = endpoint + "?" + this.encodeParams(params);
         return fetch(url,  {
             method: 'GET',
-            cache: 'force-cache'
+            cache: 'force-cache',
+            headers: {
+                "Cache-Control": "max-age=31536000"
+            }
         })
         .then(this.validateFetchResponse)
         .then(this.getApiResponse, this.apiCallingError)
-        .catch(this.apiCallingError);
+        .catch(this.logError);
     }
 
 
     validateFetchResponse(response){
-        if(response.ok){
-            // console.log("Validating Fetch Response", response);
-            // return response.json();
-        }
+        if(!response.ok){
+            console.log("Error in api calling");
+        } 
 
         return response.json();
     }
 
     getApiResponse(response){
-        // console.log("@ level", response);
+        if(response.hasOwnProperty('error')){
+            throw new Error(response.message);
+        }
         return response;
     }
 
     apiCallingError(error){
-        console.log("ISSUE:", error);
+        console.log(error);
+        const messageService = new MessageService('details-form-error', error);
+        messageService.renderMsg(true);
+    }
+
+    logError(error){
+        console.log("Error:", error);
     }
 
 }
-
-
-       // }).then(res => {
-        //    console.log("Success In CALL", resolve(res.json())); 
-        // //    return resolve(res.json());
-        // },function(error){
-        //     console.log("Error in calling", error);
-        // });
-
-
-
-            //     this.bodyParams = this.encodeParams(params);
-    //     console.log('bodyParams', this.bodyParams);
-
-
-    //     const makeRequest = async () => {
-    //         await this.getJSON();
-    //           return "data";
-    //       }
-
-    //       makeRequest().
-    //       then(res => {console.log("mr success",res)},
-    //       error => { console.log('mr error', error)}
-    //     );
-    // }

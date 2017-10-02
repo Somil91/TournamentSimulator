@@ -5,7 +5,6 @@
     <script type="text/javascript" src="./client/utilities/dom-events-subscription.js"></script>
     <script type="text/javascript" src="./client/utilities/dom-manipulation.js"></script>
     <script type="text/javascript" src="./client/utilities/endpoint-calling.js"></script>
-    <!-- <script type="text/javascript" src="./client/utilities/tournament-js"></script> -->
     <script type="text/javascript" src="./client/utilities/messages.js"></script>
     <script type="text/javascript" src="./client/tournament/team.js"></script>
     <script type="text/javascript" src="./client/tournament/match-simulation.js"></script>
@@ -17,16 +16,15 @@
     <!-- Edit me. -->
     <!-- For tests to pass, the IDs of the elements below MUST NOT change. -->
     <h3 class="header">Welcome to the Championship</h3>
-    <br>
     <div class="details-form">
       <h4>Please enter the following to start with the tournamnet</h4>
       <form>
           <label for="teamsPerMatch">Teams Per Match &emsp;</label>
-          <input id="teamsPerMatch" placeholder="Teams per match" type="number" min="2" required value="3"/>
+          <input id="teamsPerMatch" placeholder="enter teams per match" type="number" min="2" required autofocus/>
           <br><br>
 
           <label for="numberOfTeams">Number of Teams &emsp;</label>
-          <input id="numberOfTeams" placeholder="Number of teams" type="number" min="2" required value="9"/>
+          <input id="numberOfTeams" placeholder="enter number of teams" type="number" min="2" required/>
       </form>
       <br>
       <span id="details-form-error" class="error-msg"></span>
@@ -35,10 +33,7 @@
       <button id="start">Start</button>
     </div>
 
-    <div id="rounds-container" class="rounds">
-        
-
-    </div>
+    <br>
 
     <div class="messages">
         <span id="details-form-error" class="error-msg"></span>
@@ -48,5 +43,13 @@
     <div class="winner-container">
         <span id="winner"></span>
     </div>
+
+    <br>
+
+    <div id="rounds-container" class="rounds">
+    </div>
+
+    <br>
+
   </body>
 </html>
