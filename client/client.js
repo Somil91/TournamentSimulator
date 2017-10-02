@@ -1,10 +1,14 @@
-// Edit me.
-// Feel free to add other JS files in this directory as you see fit.
 
+window.onload = function() {
+    // const startElement = new TournamentTriggerElement('start');
 
-// import { TournamentTriggerElement } from './utilities/dom-events-subscription';
+    let elementRef = document.getElementById('start');
+    elementRef.onclick = function(){
+        let noOfteams = document.getElementById('numberOfTeams').value;
+        let teamsPerMatch = document.getElementById('teamsPerMatch').value;
+    
+        const tournament = new Tournament(noOfteams,teamsPerMatch);
+        // tournament.getTournamentRound(noOfteams,teamsPerMatch);
+    };
 
-
-window.onload = () => {
-    const startElement = new TournamentTriggerElement('start');
 };

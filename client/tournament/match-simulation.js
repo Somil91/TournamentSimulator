@@ -46,7 +46,7 @@ class Match{
         });
 
         if(winnerTeams.length>1){
-            winnerTeams.sort((a,b) => a.id-b.id);
+            winnerTeams.sort((a,b) => a.teamId-b.teamId);
         }
 
         console.log("Winning Team =", winnerTeams[0]);

@@ -1,15 +1,11 @@
 
 
-
-
-
 class RoundDomElement {
     constructor(roundElementId, matchesCount, roundNumber) {
         this.roundsElementRef = document.getElementById(roundElementId);
         this.matchesCount = matchesCount;
         this.roundNumber = roundNumber;
     }
-
 
     drawMatchIndicator(){
         let roundContainerElement = this.getRoundContainerElement(this.roundNumber);  

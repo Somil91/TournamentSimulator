@@ -1,54 +1,27 @@
 
 
 /**
- * Tournament Api's Calling
+ * 
  */
 
-
-
-
 class Tournament{
-    constructor(){
+    constructor(noOfTeams,teamsPerMatch){
         this.endpointService = new EndpointService();
-
+        let tournamentInstance = this.runTournament(noOfTeams, teamsPerMatch);
     }
 
-    async getTournamentRound(noOfTeams, teamsPerMatch) {
-        const payload = {numberOfTeams: noOfTeams, teamsPerMatch: teamsPerMatch};
-
-        try {
-            this.tournamentInstance = await this.getInitialTournamentRound(payload);
-                    if(this.tournamentInstance.tournamentId){
-                        this.evaluateMatches(
-                            this.tournamentInstance.tournamentId,
-                            this.tournamentInstance.round,
-                            this.tournamentInstance.matchUps,
-                            teamsPerMatch
-                        );
-                    }
-        } catch(err) {
-            this.endpointService.logError(err);
-        }
-
-    }
-
-
-   async getInitialTournamentRound(payload){
+   async runTournament(noOfTeams, teamsPerMatch){
        try {
-        let tournamentInstance = await this.endpointService.postApiData('/tournament', payload)
-        tournamentInstance.round = 0;
-        console.log("initial Tournament", tournamentInstance);
-        return tournamentInstance;
+        let payload = {numberOfTeams: noOfTeams, teamsPerMatch: teamsPerMatch};
+        this.tournamentInstance = await this.endpointService.postApiData('/tournament', payload);
+        this.tournamentInstance.round = 0;
+        this.evaluateMatches(this.tournamentInstance.tournamentId,this.tournamentInstance.round,this.tournamentInstance.matchUps,teamsPerMatch);
        } catch(err) {
            this.endpointService.apiCallingError(err);
        }
 }
     
     async evaluateMatches(tournamentId, currentRound, matchUps, teamsPerMatch){
-        // const tournamentId = this.tournamentInstance.currentRound;
-        // const allMatches = this.tournamentInstance.matchUps;
-        // const tournamentId = this.tournamentInstance.tournamentId;
-
         // 1. Formulate the Dom 
         const roundObj = new RoundDomElement('rounds-container', matchUps.length, currentRound); 
         roundObj.drawMatchIndicator();
@@ -93,7 +66,7 @@ class Tournament{
 
     displayWinner(team){
        let winnerElement = document.getElementById('winner');
-       winnerElement.textContent = team.name + ' is the Winner.'; 
+       winnerElement.textContent = team.name; 
     }
 
 }
